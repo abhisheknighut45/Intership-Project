@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: rgb(54, 135, 155);
+        }
+
+        #todo-container {
+            max-width: 400px;
+            margin: 50px auto;
+        }
+
+        #todo-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .todo-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            border: 1px solid #ccc;
+            margin-bottom: 5px;
+            background-color: #ea8e42;
+        }
+
+        .todo-item input {
+            margin-right: 10px;
+        }
+
+        .delete-btn {
+            cursor: pointer;
+            color: red;
+            border: none;
+            background: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="todo-container">
+        <h2>To-Do List</h2>
+        <ul id="todo-list"></ul>
+        <input type="text" id="todo-input" placeholder="Add a new task">
+        <button onclick="addTodo()">Add</button>
+    </div>
+
+    <script>
+        function addTodo() {
+            var todoInput = document.getElementById("todo-input");
+            var todoList = document.getElementById("todo-list");
+
+            if (todoInput.value.trim() !== "") {
+                var li = document.createElement("li");
+                li.className = "todo-item";
+                li.innerHTML = `
+                    <input type="checkbox">
+                    <span>${todoInput.value}</span>
+                    <button class="delete-btn" onclick="removeTodo(this)">Delete</button>
+                `;
+                todoList.appendChild(li);
+                todoInput.value = "";
+            }
+        }
+
+        function removeTodo(btn) {
+            var todoList = document.getElementById("todo-list");
+            var li = btn.parentNode;
+            todoList.removeChild(li);
+        }
+    </script>
+</body>
+</html>
